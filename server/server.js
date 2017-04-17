@@ -2,6 +2,7 @@
 const config = require('../config');
 
 require('./db/index');
+require('./db/schema');
 
 const Koa = require('koa');
 const koaConfig = require('./config/koa');
