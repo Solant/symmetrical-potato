@@ -5,6 +5,7 @@ const webpackHotMiddleware = require('koa-webpack-hot-middleware');
 const koaRouter = require('koa-router');
 const bodyParser = require('koa-body');
 const serve = require('koa-static');
+const logger = require('koa-logger');
 
 const historyApiFallback = require('../middleware/historyApiFallback');
 
@@ -33,6 +34,8 @@ module.exports = (app) => {
   app.use(bodyParser({
     multipart: true,
   }));
+
+  app.use(logger());
 
   const router = koaRouter();
   routeConfig(router);

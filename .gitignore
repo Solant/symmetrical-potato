@@ -1,2 +1,4 @@
+public/
+cache/
 node_modules/
 .vscode/

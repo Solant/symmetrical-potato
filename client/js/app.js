@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Perf from 'react-addons-perf';
-import App from './components/index/App';
+import App from './components/index/App.jsx';
 
 if (process.env.NODE_ENV === 'development') {
   window.Perf = Perf;

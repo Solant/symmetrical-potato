@@ -14,15 +14,13 @@ var webpackConfig = {
   context: path.join(__dirname, '/client'),
   devtool: production ? 'source-map' : 'inline-source-map',
   entry: {
-    app: './js/app.js',
+    app: [
+      './js/app.js',
+    ],
     vendors: [
       'react',
       'react-dom',
-      'react-router',
-      'redux',
-      'react-redux',
-      'redux-act',
-    ],
+    ]
   },
   output: {
     path: path.join(__dirname, '/public'),
@@ -34,6 +32,13 @@ var webpackConfig = {
       {
         test: /\.css$/,
         loader: 'style!css',
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract(
+          'style',
+          'css?sourceMap!sass?sourceMap' +
+          '&includePaths[]=' + path.resolve(__dirname, './node_modules/foundation-sites/scss/')),
       },
       {
         test: /\.(jsx|js)$/,
@@ -71,19 +76,19 @@ var webpackConfig = {
       'process.env.RW_IS_WEBPACK': true,
       'process.env': JSON.stringify(env),
     }),
-    new ExtractTextPlugin({filename: '[name].css', disable: !production }),
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendors', filename: 'js/vendors.js'}),
+    new ExtractTextPlugin('[name].css', { disable: !production }),
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'),
     new HtmlWebpackPlugin({
       template: './app.html',
       filename: 'app.html',
       inject: true,
-      excludeChunks: [],
     }),
   ],
 };
 
 if (production) {
   webpackConfig.plugins.splice(0, 0,
+    //new webpack.optimize.UglifyJsPlugin({}),
     new webpack.NormalModuleReplacementPlugin(
       /services\/debug\.js/,
       path.join(__dirname, '/client/js/services/debug.production.js')
@@ -91,15 +96,15 @@ if (production) {
   );
 } else {
   webpackConfig.plugins.splice(0, 0,
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoErrorsPlugin()
   );
 
-  webpackConfig.entry = [
+  webpackConfig.entry.app.unshift(
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     'react-hot-loader/patch'
-  ];
+  );
 }
 
 module.exports = webpackConfig;
