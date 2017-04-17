@@ -3,10 +3,10 @@ const config = require('../config');
 
 require('./db/index');
 
-const koa = require('koa');
+const Koa = require('koa');
 const koaConfig = require('./config/koa');
 
-const app = koa();
+const app = new Koa();
 app.proxy = true;
 
 koaConfig(app);

@@ -6,8 +6,8 @@ module.exports = {
   db: {
     host: 'localhost',
     port: 27017,
-    databaseName: 'RW_DB_NAME',
-    username: 'RW_DB_USERNAME',
-    password: 'RW_DB_PASSWORD',
+    databaseName: 'symmetrical-potato',
+    username: 'test',
+    password: 'test123',
   },
 };

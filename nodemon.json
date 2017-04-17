@@ -3,14 +3,14 @@
   "ignore": [
     ".git",
     "public",
-    "node_modules/",
+    "node_modules/"
   ],
   "verbose": true,
   "execMap": {
     "js": "node"
   },
   "watch": [
-    "server/",
+    "server/"
   ],
   "env": {
     "BLUEBIRD_DEBUG": 0

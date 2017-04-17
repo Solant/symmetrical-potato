@@ -14,6 +14,7 @@ var webpackConfig = {
   context: path.join(__dirname, '/client'),
   devtool: production ? 'source-map' : 'inline-source-map',
   entry: {
+    app: './js/app.js',
     vendors: [
       'react',
       'react-dom',
@@ -70,8 +71,8 @@ var webpackConfig = {
       'process.env.RW_IS_WEBPACK': true,
       'process.env': JSON.stringify(env),
     }),
-    new ExtractTextPlugin('[name].css', { disable: !production }),
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'),
+    new ExtractTextPlugin({filename: '[name].css', disable: !production }),
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendors', filename: 'js/vendors.js'}),
     new HtmlWebpackPlugin({
       template: './app.html',
       filename: 'app.html',
@@ -90,15 +91,15 @@ if (production) {
   );
 } else {
   webpackConfig.plugins.splice(0, 0,
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   );
 
-  webpackConfig.entry.app.unshift(
+  webpackConfig.entry = [
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     'react-hot-loader/patch'
-  );
+  ];
 }
 
 module.exports = webpackConfig;
