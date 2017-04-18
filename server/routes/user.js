@@ -1,13 +1,15 @@
-const User = require('../db/UserModel');
+const UserService = require('../services/UserService');
 
-module.exports.registerUser = function* registerUser() {
-  const body = this.request.body;
-  const user = new User({
-    firstName: body.firstName,
-    lastName: body.lastName,
-    favoriteBooks: body.favoriteBooks,
-    cash: body.cash,
-  });
-  const savedUser = yield user.save();
-  console.log(`Created user ${savedUser._doc.firstName} ${savedUser._doc.firstName}`);
+module.exports.createUser = function* createUser() {
+  const user = {
+    firstName: this.body.firstName,
+    lastName: this.body.lastName,
+    favoriteBooks: this.body.favoriteBooks,
+    cash: this.body.cash,
+  };
+  yield UserService.createUser(user);
+};
+
+module.exports.getAllUsers = function* getAllUsers() {
+  this.response.body = yield UserService.getAllUsers();
 };

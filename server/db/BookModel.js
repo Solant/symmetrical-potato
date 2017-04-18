@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Author = require('./AuthorModel');
 
 const Book = new mongoose.Schema();
 Book.add({
@@ -8,10 +7,8 @@ Book.add({
     firstName: String,
     lastName: String,
   },
-  title: {
-    type: String,
-    intdex: true,
-  },
+  title: String,
 });
+Book.index({ title: 1 });
 
 module.exports = mongoose.model('Book', Book);

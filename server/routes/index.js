@@ -9,9 +9,11 @@ module.exports = (router) => {
   router.get('/app', root.appHtml);
   router.post('/api/genre/add', genres.addGenre);
   router.get('/api/genre/list', genres.getGenreList);
-  router.post('/api/user/register', users.registerUser);
+  router.post('/api/user/add', users.createUser);
+  router.get('/api/user/list', users.getAllUsers);
   router.post('/api/author/add', authors.addAuthor);
   router.get('/api/author/list', authors.getAuthorList);
   router.get('/api/book/list', books.getAllBooks);
   router.post('/api/book/add', books.createBook);
+  router.get('/api/book/randomize', books.randomize);
 };

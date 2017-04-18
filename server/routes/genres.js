@@ -1,11 +1,10 @@
-const Genre = require('../db/GenreModel');
+const GenreService = require('../services/GenreService');
 
 module.exports.addGenre = function* addGenre() {
-  const newGenre = new Genre({ name: this.request.body });
-  newGenre.save().catch(reason => console.log(reason));
+  const name = this.request.body.name;
+  this.response.body = yield GenreService.addGenre(name);
 };
 
 module.exports.getGenreList = function* getAllGenres() {
-  const a = yield Genre.find({});
-  console.log(`${a.length} documents returned`);
+  this.response.body = yield GenreService.getAllGenres();
 };
