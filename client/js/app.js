@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import Perf from 'react-addons-perf';
 import App from './components/index/App.jsx';
-
-if (process.env.NODE_ENV === 'development') {
-  window.Perf = Perf;
-}
+import store from './redux/store';
 
 ReactDOM.render(
   <AppContainer>
-    <App />
+    <App store={store} />
   </AppContainer>,
   document.getElementById('react-app')
 );
@@ -21,7 +17,7 @@ if (module.hot) {
 
     ReactDOM.render(
       <AppContainer>
-        <NextApp />
+        NextApp store={store} />
       </AppContainer>,
       document.getElementById('react-app')
     );

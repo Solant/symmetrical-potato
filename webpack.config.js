@@ -20,6 +20,10 @@ var webpackConfig = {
     vendors: [
       'react',
       'react-dom',
+      'react-router',
+      'redux',
+      'react-redux',
+      'redux-act',
     ]
   },
   output: {
