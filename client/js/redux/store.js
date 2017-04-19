@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 import createSagaMiddleware from 'redux-saga';
 
 import rootSaga from './saga/index.saga.js';
-import * as states from './state/index.state.js';
+import states from './state/index.state.js';
 
 let devtool = undefined;
 if (process.env.NODE_ENV !== 'test') {
@@ -38,7 +38,7 @@ const combinedReducer = (state, action) =>
 const store = createStore(
   combinedReducer,
   {
-    ...(process.env.NODE_ENV === 'test' ? states.test : states.initial),
+    ...states,
     routing: {
       locationBeforeTransitions: null,
     },

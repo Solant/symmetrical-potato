@@ -1,5 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default function Home() {
-  return <h1>Hello World!</h1>;
+function Home(props) {
+  return <h1>Hello World! {props.example}</h1>;
 }
+
+function mapStateToProps(state) {
+  return {
+    example: state.example,
+  };
+}
+
+export default connect(mapStateToProps)(Home);
