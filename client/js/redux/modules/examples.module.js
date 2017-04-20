@@ -1,12 +1,18 @@
 import { createAction } from 'redux-act';
 
-import * as examples from '../../core/examples';
+import * as books from '../../core/books';
 
-export const example = createAction(
-  'example action',
+export const createBook = createAction(
+  'create book action',
 );
 
-export const reducer = {
-  [example]: (state, payload) =>
-    examples.example(state, payload),
+export const deleteBook = createAction(
+  'delete book',
+);
+
+export const bookReducer = {
+  [createBook]: (state, payload) =>
+    books.createBook(state, payload),
+  [deleteBook]: (state, payload) =>
+    books.deleteBook(state, payload),
 };

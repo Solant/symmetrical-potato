@@ -1,9 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
-import reducer from './reducer.js';
+import { exampleReducer, bookReducer } from './reducer.js';
 import { browserHistory } from 'react-router';
 import createSagaMiddleware from 'redux-saga';
+import { reducer as formReducer } from 'redux-form';
 
+
+import validate from '../redux/forms/BookFormValidation';
 import rootSaga from './saga/index.saga.js';
 import states from './state/index.state.js';
 
@@ -31,19 +34,20 @@ const middleware =
 
 const combinedReducer = (state, action) =>
   ({
-    ...reducer(state, action),
     routing: routerReducer(state.routing, action),
+    books: bookReducer(state.books, action),
+    form: formReducer(state.form, action),
   });
 
 const store = createStore(
   combinedReducer,
   {
-    ...states,
+    books: states,
     routing: {
       locationBeforeTransitions: null,
     },
   },
-  middleware
+  middleware,
 );
 
 const saga = sagaMiddleware.run(rootSaga);

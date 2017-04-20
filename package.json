@@ -45,6 +45,7 @@
     "react-router-redux": "4.0.4",
     "redux": "3.5.2",
     "redux-act": "0.4.2",
+    "redux-form": "^6.6.3",
     "redux-saga": "0.10.4",
     "webpack": "1.12.13"
   },
