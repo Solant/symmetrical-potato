@@ -1,9 +1,9 @@
 import { createReducer } from 'redux-act';
 
-import state from './state/index.state.js';
-import * as examplesModule from './modules/examples.module.js';
+import state from './state/index.state';
+import * as examplesModule from './modules/examples.module';
 
-export const bookReducer = createReducer(
+export default createReducer(
   {
     ...examplesModule.bookReducer,
   },

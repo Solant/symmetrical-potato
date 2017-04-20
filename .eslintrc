@@ -1,5 +1,7 @@
 {
   "env": {
+    "node": true,
+    "browser": true
   },
   "parser": "babel-eslint",
   "extends": "airbnb",
@@ -10,6 +12,7 @@
       "allowBind": false
     }],
     "arrow-body-style": [2, "as-needed"],
-    "no-underscore-dangle": [0]
+    "no-underscore-dangle": [0],
+    "import/extensions": [1, "never", { "jsx": "always" }]
   }
 }

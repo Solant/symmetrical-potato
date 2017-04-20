@@ -27,11 +27,9 @@ function Home(props) {
       <ListGroup>
         {bookList}
       </ListGroup>
-      {/*<ul>{bookList}</ul>*/}
       <BookForm onSubmit={createBook} />
     </div>
   );
-  // return (<h1>Hello</h1>);
 }
 
 function mapStateToProps(state) {

@@ -4,7 +4,7 @@ import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import validate from './BookFormValidation';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => {
-  const isValid = () => { return error ? 'error' : 'success' };
+  const isValid = () => { return error ? 'error' : 'success'; };
 
   return (
     <FormGroup validationState={isValid(error)}>

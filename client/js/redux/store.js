@@ -1,16 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
-import { exampleReducer, bookReducer } from './reducer.js';
 import { browserHistory } from 'react-router';
 import createSagaMiddleware from 'redux-saga';
 import { reducer as formReducer } from 'redux-form';
 
+import bookReducer from './reducer';
+import rootSaga from './saga/index.saga';
+import states from './state/index.state';
 
-import validate from '../redux/forms/BookFormValidation';
-import rootSaga from './saga/index.saga.js';
-import states from './state/index.state.js';
-
-let devtool = undefined;
+let devtool;
 if (process.env.NODE_ENV !== 'test') {
   devtool = window.devToolsExtension ? window.devToolsExtension() : undefined;
 }
@@ -28,7 +26,7 @@ const middleware =
       routerMiddleware(browserHistory),
       sagaMiddleware,
     ),
-    devtool
+    devtool,
   );
 
 

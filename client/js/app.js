@@ -8,7 +8,7 @@ ReactDOM.render(
   <AppContainer>
     <App store={store} />
   </AppContainer>,
-  document.getElementById('react-app')
+  document.getElementById('react-app'),
 );
 
 if (module.hot) {
@@ -19,7 +19,7 @@ if (module.hot) {
       <AppContainer>
         NextApp store={store} />
       </AppContainer>,
-      document.getElementById('react-app')
+      document.getElementById('react-app'),
     );
   });
 }
