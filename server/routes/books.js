@@ -21,3 +21,22 @@ module.exports.getAllBooks = function* getAllBooks() {
 module.exports.randomize = function* randomize() {
   BookService.initWithRandomData();
 };
+
+module.exports.getSomeBooks = function* getSomeBooks() {
+  const params = {
+    pageNumber: parseInt(this.params.pageNumber, 10),
+    pageSize: parseInt(this.params.pageSize, 10),
+  };
+  const obj = yield BookService.getSomeBooks(params);
+  obj.totalSize = yield BookService.getBookSize();
+  this.response.body = obj;
+};
+
+module.exports.getBooksInfo = function* getBooksInfo() {
+  this.response.body = yield BookService.getBooksInfo();
+};
+
+module.exports.deleteBook = function* deleteBook() {
+  yield BookService.deleteBook(this.params.id);
+  this.response.status = 200;
+};

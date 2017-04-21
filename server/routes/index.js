@@ -13,7 +13,10 @@ module.exports = (router) => {
   router.get('/api/user/list', users.getAllUsers);
   router.post('/api/author/add', authors.addAuthor);
   router.get('/api/author/list', authors.getAuthorList);
-  router.get('/api/book/list', books.getAllBooks);
+  router.get('/api/book/all', books.getAllBooks);
   router.post('/api/book/add', books.createBook);
   router.get('/api/book/randomize', books.randomize);
+  router.get('/api/book/list/:pageNumber/:pageSize', books.getSomeBooks);
+  router.get('/api/book/info', books.getBooksInfo);
+  router.del('/api/book/:id', books.deleteBook);
 };

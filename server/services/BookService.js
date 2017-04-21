@@ -7,11 +7,34 @@ module.exports = class BookService {
     return user.save().then(model => model.toObject());
   }
 
+  static deleteBook(id) {
+    return BookModel.find({ _id: id }).remove();
+  }
+
   static getAllBooks() {
-    return BookModel.find({}).then((model) => {
+    return BookModel.find({}).sort({ _id: 1 }).then((model) => {
       const books = model.map(arg => arg.toObject());
       return books;
     });
+  }
+
+  static getSomeBooks({ pageNumber, pageSize }) {
+    return BookModel.find({}).sort({ _id: 1 })
+    .skip(pageNumber * pageSize).limit(pageSize)
+    .then(function (result) {
+      return result.map( arg => arg.toObject());
+    })
+    .then(function (array) {
+      return {
+        books: array,
+        pageNumber,
+        pageSize,
+      };
+    });
+  }
+
+  static getBookSize() {
+    return BookModel.count();
   }
 
   static initWithRandomData() {
