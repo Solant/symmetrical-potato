@@ -7,6 +7,7 @@ import { reducer as formReducer } from 'redux-form';
 import bookReducer from './reducer';
 import rootSaga from './saga/index.saga';
 import states from './state/index.state';
+import { createBookSuccess } from './modules/examples.module';
 
 let devtool;
 if (process.env.NODE_ENV !== 'test') {
@@ -34,7 +35,16 @@ const combinedReducer = (state, action) =>
   ({
     routing: routerReducer(state.routing, action),
     books: bookReducer(state.books, action),
-    form: formReducer(state.form, action),
+    form: formReducer.plugin({
+      book: (state, action) => {
+        switch (action.type) {
+          case createBookSuccess.getType():
+            return undefined;
+          default:
+            return state;
+        }
+      },
+    })(state.form, action),
   });
 
 const store = createStore(

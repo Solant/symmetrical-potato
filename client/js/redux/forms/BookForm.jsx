@@ -13,7 +13,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => {
       <FormControl.Feedback />
       {touched && error && <span>{error}</span>}
     </FormGroup>
-  )
+  );
 };
 
 class BookForm extends Component {

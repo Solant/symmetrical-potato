@@ -5,12 +5,10 @@ import { createBook, deleteBook } from '../../redux/modules/examples.module';
 import BookForm from '../../redux/forms/BookForm.jsx';
 
 function Home(props) {
-  const bookList = props.books.map(book =>
-    <ListGroupItem header={book.title}>
-      by {book.author.firstName} {book.author.lastName}
-      <Button bsStyle="danger" onClick={() => {props.deleteBook(book.id)}}>Delete</Button>
-    </ListGroupItem>);
-  const createBook = function createBook(values) {
+  function handleDeleteBook(id) {
+    return () => props.deleteBook(id);
+  }
+  function handleCreateBook(values) {
     props.createBook({
       title: values.title,
       id: Math.random() * 100,
@@ -19,15 +17,19 @@ function Home(props) {
         lastName: values.lastName,
       },
     });
-  };
+  }
+  const bookList = props.books.map(book =>
+    <ListGroupItem header={book.title} key={book.id}>
+      by {book.author.firstName} {book.author.lastName}
+      <Button bsStyle="danger" onClick={handleDeleteBook(book.id)}>Delete</Button>
+    </ListGroupItem>);
   return (
     <div>
-
       <h1>Hello World!</h1>
       <ListGroup>
         {bookList}
       </ListGroup>
-      <BookForm onSubmit={createBook} />
+      <BookForm onSubmit={handleCreateBook} />
     </div>
   );
 }

@@ -17,7 +17,7 @@ if (module.hot) {
 
     ReactDOM.render(
       <AppContainer>
-        NextApp store={store} />
+        <NextApp store={store} />
       </AppContainer>,
       document.getElementById('react-app'),
     );

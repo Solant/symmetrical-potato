@@ -1,8 +1,6 @@
 export function createBook(state, payload) {
-  // const newBook = payload;
   return [
     ...state,
-    // newBook,
   ];
 }
 
